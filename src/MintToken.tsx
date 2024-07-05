@@ -50,12 +50,26 @@ function MintToken() {
         );
         console.log(`Create Token Account: ${fromTokenAccount.address.toBase58()}`);
     }
+
+    async function mintToken() {      
+        // Mint 1 new token to the "fromTokenAccount" account we just created
+        const signature = await mintTo(
+            connection,
+            fromWallet,
+            mint,
+            fromTokenAccount.address,
+            fromWallet.publicKey,
+            10000000000 // 10 billion
+        );
+        console.log(`Mint signature: ${signature}`);
+    }
+
     return (
         <div>
             Mint Token Section
             <div>
                 <button onClick={createToken}>Create token</button>
-                <button >Mint token</button>
+                <button onClick={mintToken}>Mint token</button>
                 <button >Check balance</button>
                 <button >Send token</button>
             </div>
